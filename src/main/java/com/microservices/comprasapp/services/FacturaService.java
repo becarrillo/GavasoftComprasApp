@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,8 @@ public class FacturaService {
     private FacturaRepository facturaRepository;
 
     public Factura save(Factura factura) {
+        // Se es asignada fecha_hora con el instante en que se llama al método y se guarda la factura
+        factura.setFechaHora(LocalDateTime.now(ZoneId.of("GMT-5")));
         return facturaRepository.save(factura);
     }
 

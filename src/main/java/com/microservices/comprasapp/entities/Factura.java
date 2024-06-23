@@ -1,6 +1,5 @@
 package com.microservices.comprasapp.entities;
 
-import com.microservices.comprasapp.external.models.Agendamiento;
 import jakarta.persistence.*;
 import jdk.jfr.Unsigned;
 import lombok.AllArgsConstructor;
@@ -10,8 +9,6 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.List;
 
 /**
  * @author Brando Elí Carrillo Pérez
@@ -29,11 +26,11 @@ public class Factura {
     @Column(name = "factura_id")
     private int facturaId;
 
-    @Column(name = "cliente_tipo_documento")
-    private String clienteTipoDocumento;
-
     @Column(name = "cliente_num_documento")
     private String clienteNumDocumento;
+
+    @Column(name = "concepto_de_pago")
+    private String conceptoDePago;
 
     @Column(name = "iva")
     private Short iva;
@@ -56,22 +53,25 @@ public class Factura {
     @Column(name = "fecha_hora")
     private LocalDateTime fechaHora;
 
-    // Anotación '@Transient': El atributo es de valor no persistido en base de datos
-    @Transient
-    private List<Agendamiento> agendamientosList;
-
     public Factura(
-            String clienteTipoDocumento,
             String clienteNumDocumento,
-            String carritoDeComprasId,
-            List<Agendamiento> agendamientosList,
+            String conceptoDePago,
             String metodoDePago
     ) {
-        this.clienteTipoDocumento = clienteTipoDocumento;
         this.clienteNumDocumento = clienteNumDocumento;
-        this.carritoDeComprasId = carritoDeComprasId;
-        this.agendamientosList = agendamientosList;
+        this.conceptoDePago = conceptoDePago;
         this.metodoDePago = metodoDePago;
-        this.fechaHora = LocalDateTime.now(ZoneId.of("GMT-5"));
+    }
+
+    public Factura(
+            String clienteNumDocumento,
+            String conceptoDePago,
+            String carritoDeComprasId,
+            String metodoDePago
+    ) {
+        this.clienteNumDocumento = clienteNumDocumento;
+        this.conceptoDePago = conceptoDePago;
+        this.carritoDeComprasId = carritoDeComprasId;
+        this.metodoDePago = metodoDePago;
     }
 }

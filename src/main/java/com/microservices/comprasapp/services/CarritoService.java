@@ -34,13 +34,21 @@ public class CarritoService {
     }
 
     public Carrito getOne(String carritoDeComprasId) {
-        final Optional<Carrito> optCarrito = carritoRepository.findById(carritoDeComprasId);
-        return optCarrito.orElse(null);
+        try {
+            final Carrito carrito = carritoRepository
+                .findById(carritoDeComprasId)
+                .orElse(null);
+            return carrito;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public int getSubtotalById(String carritoDeComprasId) {
         return Objects.requireNonNull(carritoRepository.findAll()
-                        .stream().filter(c -> c.getCarritoId().equals(carritoDeComprasId)).findAny()
+                        .stream()
+                        .filter(c -> c.getCarritoId().equals(carritoDeComprasId))
+                        .findAny()
                         .orElse(null))
                 .getSubtotal();
     }

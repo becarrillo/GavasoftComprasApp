@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/carritos-de-compras")
+@CrossOrigin("http://USUARIO-APP")
+@RequestMapping(path = "/v1/carritos-de-compras")
 public class CarritoController {
     @Autowired
     private CarritoService carritoService;
