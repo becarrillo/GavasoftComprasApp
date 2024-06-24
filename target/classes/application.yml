@@ -1,0 +1,18 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: COMPRAS-APP
+  datasource:
+    url: jdbc:mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DBNAME}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+      format_sql: true
+    show-sql: true
+
+  config:
+    import: optional:configserver:http://localhost:8085
