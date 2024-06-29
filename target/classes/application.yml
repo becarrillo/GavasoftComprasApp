@@ -13,6 +13,15 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
       format_sql: true
     show-sql: true
+  cloud:
+    config:
+      enabled: false
 
-  config:
-    import: optional:configserver:http://localhost:8085
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://gavasoftregistryservice.railway.internal:8761/eureka/
